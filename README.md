@@ -10,6 +10,8 @@ Penstock lets you declaratively define how data flows through your applicationâ€
 - **Flow definitions** via decorators that double as living documentation
 - **DAG visualization** to see all possible paths through your system at a glance
 
+**Penstock's unique value prop**: Describe flows that already exist in your code, get correlation IDs automatically for log grouping, and generate static documentation of all possible paths â€” without changing how your code executes or adding infrastructure.
+
 ## Installation
 
 ```bash
