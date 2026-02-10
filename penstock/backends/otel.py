@@ -35,9 +35,7 @@ class OTelBackend(TracingBackend):
         self._tracer = trace.get_tracer(tracer_name)
 
     @contextmanager
-    def span(
-        self, step_name: str, flow_name: str, **attrs: Any
-    ) -> Iterator[None]:
+    def span(self, step_name: str, flow_name: str, **attrs: Any) -> Iterator[None]:
         with self._tracer.start_as_current_span(
             step_name,
             attributes={"penstock.flow": flow_name, **attrs},

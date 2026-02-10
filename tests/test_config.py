@@ -5,7 +5,6 @@ from __future__ import annotations
 import pytest
 
 from penstock._config import configure, get_backend, reset
-from penstock.backends.base import TracingBackend
 from penstock.backends.logging import LoggingBackend
 
 

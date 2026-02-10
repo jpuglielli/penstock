@@ -34,9 +34,7 @@ class FlowRegistry:
             steps = self._steps.get(name)
             if steps is None:
                 raise KeyError(f"Flow '{name}' not found")
-            entrypoints = frozenset(
-                s.name for s in steps.values() if s.is_entrypoint
-            )
+            entrypoints = frozenset(s.name for s in steps.values() if s.is_entrypoint)
             return FlowInfo(name=name, steps=dict(steps), entrypoints=entrypoints)
 
     def get_all_flow_names(self) -> list[str]:

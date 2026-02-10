@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from typing import Any, Callable
 
-from penstock._context import FlowContext, _reset_context, _set_context, current_flow_id
+from penstock._context import FlowContext, _reset_context, _set_context
 
 
 class FlowMiddleware:

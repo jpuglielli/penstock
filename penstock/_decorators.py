@@ -93,10 +93,7 @@ def entrypoint(fn: Callable[P, R]) -> Callable[P, R]: ...
 def entrypoint(
     *,
     name: str | None = ...,
-    after: str
-    | Callable[..., Any]
-    | list[str | Callable[..., Any]]
-    | None = ...,
+    after: str | Callable[..., Any] | list[str | Callable[..., Any]] | None = ...,
 ) -> Callable[[Callable[P, R]], Callable[P, R]]: ...
 
 
@@ -104,10 +101,7 @@ def entrypoint(
     fn: Callable[..., Any] | None = None,
     *,
     name: str | None = None,
-    after: str
-    | Callable[..., Any]
-    | list[str | Callable[..., Any]]
-    | None = None,
+    after: str | Callable[..., Any] | list[str | Callable[..., Any]] | None = None,
 ) -> Any:
     """Mark a method as a flow entrypoint.
 
@@ -127,10 +121,7 @@ def _make_entrypoint(
     fn: Callable[..., Any],
     *,
     name: str | None,
-    after: str
-    | Callable[..., Any]
-    | list[str | Callable[..., Any]]
-    | None,
+    after: str | Callable[..., Any] | list[str | Callable[..., Any]] | None,
 ) -> Callable[..., Any]:
     step_name = name or fn.__name__
     after_tuple = _normalize_after(after)
@@ -142,9 +133,7 @@ def _make_entrypoint(
             _set_context(FlowContext())
             backend = get_backend()
             try:
-                with backend.span(
-                    step_name, _resolve_flow_name(async_wrapper)
-                ):
+                with backend.span(step_name, _resolve_flow_name(async_wrapper)):
                     return await fn(*args, **kwargs)
             finally:
                 _reset_context()
@@ -195,10 +184,7 @@ def step(fn: Callable[P, R]) -> Callable[P, R]: ...
 def step(
     *,
     name: str | None = ...,
-    after: str
-    | Callable[..., Any]
-    | list[str | Callable[..., Any]]
-    | None = ...,
+    after: str | Callable[..., Any] | list[str | Callable[..., Any]] | None = ...,
 ) -> Callable[[Callable[P, R]], Callable[P, R]]: ...
 
 
@@ -206,10 +192,7 @@ def step(
     fn: Callable[..., Any] | None = None,
     *,
     name: str | None = None,
-    after: str
-    | Callable[..., Any]
-    | list[str | Callable[..., Any]]
-    | None = None,
+    after: str | Callable[..., Any] | list[str | Callable[..., Any]] | None = None,
 ) -> Any:
     """Mark a method as a flow step.
 
@@ -229,10 +212,7 @@ def _make_step(
     fn: Callable[..., Any],
     *,
     name: str | None,
-    after: str
-    | Callable[..., Any]
-    | list[str | Callable[..., Any]]
-    | None,
+    after: str | Callable[..., Any] | list[str | Callable[..., Any]] | None,
 ) -> Callable[..., Any]:
     step_name = name or fn.__name__
     after_tuple = _normalize_after(after)
@@ -248,9 +228,7 @@ def _make_step(
                     "Ensure an @entrypoint has been called first."
                 )
             backend = get_backend()
-            with backend.span(
-                step_name, _resolve_flow_name(async_wrapper)
-            ):
+            with backend.span(step_name, _resolve_flow_name(async_wrapper)):
                 return await fn(*args, **kwargs)
 
         setattr(

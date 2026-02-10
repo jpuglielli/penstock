@@ -91,15 +91,12 @@ class TestThreadSafety:
         def register_steps(prefix: str) -> None:
             try:
                 for i in range(50):
-                    _registry.register(
-                        _step(name=f"{prefix}_{i}", flow="concurrent")
-                    )
+                    _registry.register(_step(name=f"{prefix}_{i}", flow="concurrent"))
             except Exception as exc:
                 errors.append(exc)
 
         threads = [
-            threading.Thread(target=register_steps, args=(f"t{t}",))
-            for t in range(4)
+            threading.Thread(target=register_steps, args=(f"t{t}",)) for t in range(4)
         ]
         for t in threads:
             t.start()

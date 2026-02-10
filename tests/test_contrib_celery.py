@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Any
 
-from penstock._context import FlowContext, _set_context, current_flow_id, get_flow_context
+from penstock._context import (
+    FlowContext,
+    _set_context,
+    current_flow_id,
+    get_flow_context,
+)
 from penstock.contrib.celery import flow_task
 
 
@@ -47,9 +51,7 @@ class TestFlowTask:
         def my_task() -> None:
             captured.append(current_flow_id())
 
-        my_task(
-            __penstock_headers__={"penstock_correlation_id": "injected-cid"}
-        )
+        my_task(__penstock_headers__={"penstock_correlation_id": "injected-cid"})
         assert captured[0] == "injected-cid"
 
     def test_generates_new_id_without_headers(self) -> None:

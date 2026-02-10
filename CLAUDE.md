@@ -10,6 +10,11 @@ Types: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `ci`, `build`, `perf`
 
 ## Development
 
-- `uv run mypy` — strict type checking, must pass with 0 errors
-- `uv run pytest tests/ -v` — full test suite, must pass with 0 warnings
+- `just setup` — install deps and configure hooks
+- `just check` — run all checks (lint + typecheck + tests)
+- `just lint` / `just fix` — ruff lint / auto-fix
+- `just typecheck` — mypy strict, must pass with 0 errors
+- `just test` — full test suite, must pass with 0 warnings
+- `just demo <name>` — run a playground demo (e.g. `just demo flow`)
 - Python >=3.14, zero runtime dependencies
+- Pre-commit hook runs ruff + mypy automatically

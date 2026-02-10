@@ -8,7 +8,6 @@ import pytest
 
 from penstock._context import current_flow_id, get_flow_context
 from penstock._decorators import (
-    _STEP_MARKER,
     _normalize_after,
     entrypoint,
     flow,

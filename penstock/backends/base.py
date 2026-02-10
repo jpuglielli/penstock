@@ -13,9 +13,7 @@ class TracingBackend(ABC):
 
     @abstractmethod
     @contextmanager
-    def span(
-        self, step_name: str, flow_name: str, **attrs: Any
-    ) -> Iterator[None]:
+    def span(self, step_name: str, flow_name: str, **attrs: Any) -> Iterator[None]:
         """Open a tracing span for the duration of a step."""
 
     @abstractmethod

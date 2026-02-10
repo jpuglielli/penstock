@@ -37,7 +37,9 @@ include = ["penstock/", "LICENSE", "README.md"]
 [dependency-groups]
 dev = [
     "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
     "pytest>=8.0",
+    "ruff>=0.15.0",
 ]
 
 [tool.mypy]

@@ -18,9 +18,7 @@ class LoggingBackend(TracingBackend):
     """Emits structured log records for each span start/end."""
 
     @contextmanager
-    def span(
-        self, step_name: str, flow_name: str, **attrs: Any
-    ) -> Iterator[None]:
+    def span(self, step_name: str, flow_name: str, **attrs: Any) -> Iterator[None]:
         correlation_id = self.get_correlation_id()
         extra = {
             "flow": flow_name,

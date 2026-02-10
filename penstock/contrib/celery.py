@@ -89,9 +89,7 @@ def install_celery_signals() -> None:
             headers["penstock_correlation_id"] = cid
 
     @task_prerun.connect  # type: ignore[untyped-decorator]
-    def _restore_penstock_context(
-        sender: Any = None, **kwargs: Any
-    ) -> None:
+    def _restore_penstock_context(sender: Any = None, **kwargs: Any) -> None:
         request = getattr(sender, "request", None)
         if request is None:
             return
