@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import functools
 import inspect
-from typing import Any, Callable, TypeVar, overload
+from collections.abc import Callable
+from typing import Any, TypeVar, overload
 
 from penstock._config import get_backend
 from penstock._context import (

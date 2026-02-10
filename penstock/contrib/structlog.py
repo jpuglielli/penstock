@@ -24,7 +24,7 @@ from penstock._context import current_flow_id
 
 
 def flow_processor(
-    logger: Any, method_name: str, event_dict: dict[str, Any]
+    _logger: Any, _method_name: str, event_dict: dict[str, Any]
 ) -> dict[str, Any]:
     """structlog processor that adds ``flow_id`` to every log event.
 

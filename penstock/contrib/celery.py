@@ -23,7 +23,8 @@ worker side.
 from __future__ import annotations
 
 import functools
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 from penstock._context import FlowContext, _reset_context, _set_context, current_flow_id
 
@@ -89,7 +90,7 @@ def install_celery_signals() -> None:
             headers["penstock_correlation_id"] = cid
 
     @task_prerun.connect  # type: ignore[untyped-decorator]
-    def _restore_penstock_context(sender: Any = None, **kwargs: Any) -> None:
+    def _restore_penstock_context(sender: Any = None, **_kwargs: Any) -> None:
         request = getattr(sender, "request", None)
         if request is None:
             return

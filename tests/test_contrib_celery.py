@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 
 from penstock._context import (
     FlowContext,
@@ -38,10 +39,8 @@ class TestFlowTask:
         def my_task() -> None:
             raise ValueError("boom")
 
-        try:
+        with contextlib.suppress(ValueError):
             my_task()
-        except ValueError:
-            pass
         assert get_flow_context() is None
 
     def test_restores_correlation_id_from_headers(self) -> None:

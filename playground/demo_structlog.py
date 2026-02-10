@@ -13,7 +13,7 @@ try:
     import structlog
 except ImportError:
     print("This demo requires structlog: pip install structlog")
-    raise SystemExit(1)
+    raise SystemExit(1) from None
 
 structlog.configure(
     processors=[

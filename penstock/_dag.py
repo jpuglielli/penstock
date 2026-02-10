@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Literal, overload
 
 from penstock._registry import _registry
@@ -58,18 +59,18 @@ def generate_dag(
     lines: list[str] = ["graph TD"]
 
     # Collect edges from the `after` relationships.
-    edges: list[tuple[str, str]] = []
-    for step in info.steps.values():
-        for predecessor in step.after:
-            edges.append((predecessor, step.name))
+    edges: list[tuple[str, str]] = [
+        (predecessor, step.name)
+        for step in info.steps.values()
+        for predecessor in step.after
+    ]
 
     # Sort for deterministic output.
     edges.sort()
 
     if not edges:
         # Flow with steps but no edges — list each step as a standalone node.
-        for name in sorted(info.steps):
-            lines.append(f"    {name}")
+        lines.extend(f"    {name}" for name in sorted(info.steps))
     else:
         for src, dst in edges:
             lines.append(f"    {src} --> {dst}")
@@ -77,8 +78,7 @@ def generate_dag(
     diagram = "\n".join(lines) + "\n"
 
     if output is not None:
-        with open(output, "w") as f:
-            f.write(diagram)
+        Path(output).write_text(diagram)
         return None
 
     return diagram

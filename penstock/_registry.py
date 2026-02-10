@@ -49,13 +49,12 @@ class FlowRegistry:
         Raises ``KeyError`` if the flow itself is not registered.
         """
         flow = self.get_flow(name)
-        missing: list[str] = []
-        for step in flow.steps.values():
-            for ref in step.after:
-                if ref not in flow.steps:
-                    missing.append(
-                        f"Step '{step.name}' references unknown step '{ref}'"
-                    )
+        missing: list[str] = [
+            f"Step '{step.name}' references unknown step '{ref}'"
+            for step in flow.steps.values()
+            for ref in step.after
+            if ref not in flow.steps
+        ]
         if missing:
             raise ValueError(
                 f"Flow '{name}' has invalid references:\n"

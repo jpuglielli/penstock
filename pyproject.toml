@@ -54,3 +54,33 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 show_error_codes = true
 files = ["penstock", "main.py", "tests"]
+
+[tool.ruff]
+target-version = "py314"
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "F",      # Pyflakes
+    "W",      # pycodestyle warnings
+    "UP",     # pyupgrade — modernize syntax
+    "I",      # isort — import sorting
+    "B",      # flake8-bugbear — common bug patterns
+    "C4",     # flake8-comprehensions — better comprehensions
+    "SIM",    # flake8-simplify — simplifiable code
+    "FA",     # flake8-future-annotations — enforce `from __future__ import annotations`
+    "RET",    # flake8-return — return statement cleanup
+    "PTH",    # flake8-use-pathlib — prefer pathlib over os.path
+    "PERF",   # Perflint — performance anti-patterns
+    "RUF",    # Ruff-specific rules
+    "ARG",    # flake8-unused-arguments
+    "LOG",    # flake8-logging — proper logging usage
+]
+ignore = [
+    "ISC001", # conflicts with ruff-format
+    "RET504", # unnecessary assignment before return — often clearer with the name
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ARG"]       # test fixtures often have unused args
+"playground/*" = ["E501"]  # demo format strings can be long

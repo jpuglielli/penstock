@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import threading
-from typing import Union
 
 from penstock.backends.base import TracingBackend
 
@@ -12,7 +11,7 @@ _backend: TracingBackend | None = None
 _configured = False
 
 
-def configure(backend: Union[TracingBackend, str] = "auto") -> None:
+def configure(backend: TracingBackend | str = "auto") -> None:
     """Set the global tracing backend.
 
     *backend* can be:

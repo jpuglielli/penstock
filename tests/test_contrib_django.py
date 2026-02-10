@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 from typing import Any
 
 from penstock._context import current_flow_id, get_flow_context
@@ -48,10 +49,8 @@ class TestFlowMiddleware:
 
     def test_resets_context_on_exception(self) -> None:
         mw, _ = _make_middleware(view_side_effect=ValueError)
-        try:
+        with contextlib.suppress(ValueError):
             mw(object())
-        except ValueError:
-            pass
         assert get_flow_context() is None
 
     def test_adds_correlation_id_header(self) -> None:

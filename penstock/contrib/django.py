@@ -15,7 +15,8 @@ fresh correlation ID.  The ID is available throughout the request via
 
 from __future__ import annotations
 
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 from penstock._context import FlowContext, _reset_context, _set_context
 

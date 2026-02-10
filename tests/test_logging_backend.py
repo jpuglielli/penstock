@@ -15,9 +15,11 @@ class TestSpan:
         _set_context(FlowContext(correlation_id="test-cid"))
         backend = LoggingBackend()
 
-        with caplog.at_level(logging.INFO, logger="penstock"):
-            with backend.span("my_step", "my_flow"):
-                pass
+        with (
+            caplog.at_level(logging.INFO, logger="penstock"),
+            backend.span("my_step", "my_flow"),
+        ):
+            pass
 
         assert len(caplog.records) == 2
         start, end = caplog.records
@@ -35,9 +37,11 @@ class TestSpan:
         _set_context(FlowContext(correlation_id="cid"))
         backend = LoggingBackend()
 
-        with caplog.at_level(logging.INFO, logger="penstock"):
-            with backend.span("s", "f", custom_key="custom_val"):
-                pass
+        with (
+            caplog.at_level(logging.INFO, logger="penstock"),
+            backend.span("s", "f", custom_key="custom_val"),
+        ):
+            pass
 
         start = caplog.records[0]
         assert start.custom_key == "custom_val"  # type: ignore[attr-defined]
@@ -46,9 +50,8 @@ class TestSpan:
         _set_context(FlowContext(correlation_id="cid"))
         backend = LoggingBackend()
 
-        with caplog.at_level(logging.INFO, logger="penstock"):
-            with backend.span("s", "f"):
-                pass
+        with caplog.at_level(logging.INFO, logger="penstock"), backend.span("s", "f"):
+            pass
 
         end = caplog.records[1]
         assert isinstance(end.duration_ms, float)  # type: ignore[attr-defined]

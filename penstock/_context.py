@@ -16,7 +16,7 @@ class FlowContext:
     independent deep-copy of metadata (useful for Celery / cross-process).
     """
 
-    __slots__ = ("correlation_id", "_metadata")
+    __slots__ = ("_metadata", "correlation_id")
 
     def __init__(
         self,
